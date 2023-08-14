@@ -1,0 +1,19 @@
+{
+  "name": "escola-para-todos",
+  "version": "1.0.0",
+  "description": "## Contexto Você foi contratado pela maior faculdade à distância da América Latina para construir uma API para controle de aula dos alunos.",
+  "main": "dados.js",
+  "scripts": {
+    "dev": "nodemon ./src/index.js",
+    "start": "node ./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
