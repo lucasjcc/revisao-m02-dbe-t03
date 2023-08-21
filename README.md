@@ -14,8 +14,8 @@ Sua API deve permitir
   - [ ] Deletar uma conta (mediante à verificação de senha)
 - Alunos:
   - [ ] Criar uma aula
-  - [ ] Listar aulas
-  - [ ] Detalhar uma aula
+  - [x] Listar aulas
+  - [x] Detalhar uma aula
   - [ ] Deletar uma aula (mediante à verificação de senha)
   - [ ] Filtrar as aulas por concluídas
 
