@@ -36,16 +36,16 @@ const criarAula = (req, res) => {
     const { id } = req.params
     const { nome, vista } = req.body
     if (!id || !nome || vista === undefined) {
-        return res.json({ mensagem: "Todos os campos são obrigatórios" })
+        return res.status(400).json({ mensagem: "Todos os campos são obrigatórios" })
     }
     const pessoaEncontrada = dados.find(pessoa => pessoa.id === Number(id))
     
     if (!pessoaEncontrada) {
-        return res.json({ mensagem: "Aluno não encontrado" })
+        return res.status(404).json({ mensagem: "Aluno não encontrado" })
     }
 
     if (pessoaEncontrada.cargo !== "aluno") {
-        return res.json({ mensagem: "As aulas estão associadas somente a alunos" })
+        return res.status(403).json({ mensagem: "As aulas estão associadas somente a alunos" })
     }
 
     const novaAula = {
@@ -55,7 +55,7 @@ const criarAula = (req, res) => {
     }
     proximoId++
     pessoaEncontrada.aulas.push(novaAula)
-    return res.json(novaAula)
+    return res.status(201).json(novaAula)
 }
 
 module.exports = {
