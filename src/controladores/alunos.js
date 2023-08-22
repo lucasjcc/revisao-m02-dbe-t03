@@ -2,9 +2,6 @@ const { dados } = require('../../dados')
 
 const listarAulas = (req, res) => {
     const { id } = req.params
-    if (isNaN(Number(id))) {
-        return res.status(400).json({ mensagem: "O id deve ser um número"})
-    }
     const pessoaEncontrada = dados.find(pessoa => pessoa.id === Number(id))
     if (!pessoaEncontrada) {
         return res.status(404).json({ mensagem: "Aluno não encontrado" })
@@ -41,10 +38,6 @@ const criarAula = (req, res) => {
     if (!id || !nome || vista === undefined) {
         return res.json({ mensagem: "Todos os campos são obrigatórios" })
     }
-    if (isNaN(Number(id))) {
-        return res.json({ mensagem: "O identificador deve ser numérico" })
-    }
-
     const pessoaEncontrada = dados.find(pessoa => pessoa.id === Number(id))
     
     if (!pessoaEncontrada) {
