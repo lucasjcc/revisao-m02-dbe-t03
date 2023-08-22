@@ -20,7 +20,7 @@ const listarAula = (req, res) => {
     if (isNaN(Number(id)) || isNaN(Number(idAula))) {
         return res.status(400).json({ mensagem: "Os campos identificadores devem ser numéricos" })
     }
-    const pessoaEncontrada = dados.find(aluno => aluno.id === Number(id))
+    const pessoaEncontrada = dados.find(pessoa => pessoa.id === Number(id))
     if (!pessoaEncontrada) {
         return res.status(404).json({ mensagem: "Aluno não encontrado" })
     }
@@ -34,7 +34,39 @@ const listarAula = (req, res) => {
     return res.status(200).json(aulaProcurada)
 }
 
+let proximoId = 16
+const criarAula = (req, res) => {
+    const { id } = req.params
+    const { nome, vista } = req.body
+    if (!id || !nome || vista === undefined) {
+        return res.json({ mensagem: "Todos os campos são obrigatórios" })
+    }
+    if (isNaN(Number(id))) {
+        return res.json({ mensagem: "O identificador deve ser numérico" })
+    }
+
+    const pessoaEncontrada = dados.find(pessoa => pessoa.id === Number(id))
+    
+    if (!pessoaEncontrada) {
+        return res.json({ mensagem: "Aluno não encontrado" })
+    }
+
+    if (pessoaEncontrada.cargo !== "aluno") {
+        return res.json({ mensagem: "As aulas estão associadas somente a alunos" })
+    }
+
+    const novaAula = {
+        id: proximoId,
+        nome,
+        vista: vista === "true" ? Boolean(vista) : false
+    }
+    proximoId++
+    pessoaEncontrada.aulas.push(novaAula)
+    return res.json(novaAula)
+}
+
 module.exports = {
     listarAulas,
-    listarAula
+    listarAula,
+    criarAula
 }
